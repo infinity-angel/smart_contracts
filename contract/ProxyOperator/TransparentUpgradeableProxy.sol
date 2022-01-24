@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts v4.4.1 (proxy/transparent/TransparentUpgradeableProxy.sol)
 
-pragma solidity ^0.8.0;
+pragma solidity 0.8.10;
 
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
@@ -106,13 +106,6 @@ contract TransparentUpgradeableProxy is ERC1967Proxy {
      */
     function upgradeToAndCall(address newImplementation, bytes calldata data) external payable ifAdmin {
         _upgradeToAndCall(newImplementation, data, true);
-    }
-
-    /**
-     * @dev Returns the current admin.
-     */
-    function _admin() internal view virtual returns (address) {
-        return _getAdmin();
     }
 
     /**

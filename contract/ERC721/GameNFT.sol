@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity 0.8.10;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
@@ -13,16 +13,6 @@ import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 interface IERC20 {
     function transfer(address recipient, uint256 amount) external returns (bool);
     function decimals() external view returns (uint8);
-}
-
-library GameNFTLibrary {
-
-    function isContract(address _address) internal view returns (bool addressCheck) {
-        bytes32 codehash;
-        bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
-        assembly { codehash := extcodehash(_address) }
-        addressCheck = (codehash != 0x0 && codehash != accountHash);
-    }
 }
 
 /// @custom:security-contact hai.nguyen@spexchange.io
