@@ -100,7 +100,7 @@ contract TokenTimelock is Initializable {
             arrVesting.push(
                 Vesting(
                     string(abi.encodePacked("Linear vesting at ", month.toString(), "(st,nd,rd,th) month")),
-                    TGETime_ + (cliffMonths_ + month) * 2 minutes,
+                    TGETime_ + (cliffMonths_ + month) * 30 days,
                     linearVestingPercentPerMonth_,
                     amountLinearVesting,
                     false
