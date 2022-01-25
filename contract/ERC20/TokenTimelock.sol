@@ -99,7 +99,7 @@ contract TokenTimelock is Initializable {
             }
             arrVesting.push(
                 Vesting(
-                    string(abi.encodePacked("Linear vesting at ", month.toString(), "rd month")),
+                    string(abi.encodePacked("Linear vesting at ", month.toString(), "(st,nd,rd,th) month")),
                     TGETime_ + (cliffMonths_ + month) * 2 minutes,
                     linearVestingPercentPerMonth_,
                     amountLinearVesting,
@@ -109,6 +109,9 @@ contract TokenTimelock is Initializable {
         }
     }
 
+    /**
+     * @dev Return amount token can be withdraw by beneficiary and the stage status base on current blocktime.
+     */
     function withdrawableBalance() public view returns (uint256 amount, uint256 stage) {
         amount = 0;
         stage = 0;
