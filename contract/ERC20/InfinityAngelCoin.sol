@@ -30,6 +30,17 @@ contract InfinityAngelCoin is Initializable, ERC20Upgradeable, ERC20BurnableUpgr
         _mint(to, amount);
     }
 
+    function burnFrom(address account, uint256 amount) public override {
+        if (_msgSender() != owner()) {
+            uint256 currentAllowance = allowance(account, _msgSender());
+            require(currentAllowance >= amount, "ERC20: burn amount exceeds allowance");
+            unchecked {
+                _approve(account, _msgSender(), currentAllowance - amount);
+            }
+        }
+        _burn(account, amount);
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount)
         internal
         whenNotPaused
