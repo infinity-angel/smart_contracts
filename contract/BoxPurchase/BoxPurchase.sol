@@ -61,16 +61,17 @@ contract BoxPurchase is Initializable, PausableUpgradeable, ReentrancyGuard, Own
         // Check verifier side validity.
         require(validateVerifierSignature(box, verifierSignature), "Verifier side signature is invalid");
 
-        //Check value
-        require(msg.value == box.price, "Value is not equal price");
-
         // Check order type use native coin
         if (box.paymentContract == address(0)){
+            require(msg.value == box.price, "Value is not equal price");
             sendValue(foundationAddress, box.price);
         // Else order type use ERC20 token
         } else {
+            // Check no value receive
+            require(msg.value == 0, "Can not receive native coin");
             safeTransfer(box.paymentContract, _msgSender(), foundationAddress, box.price);
         }
+        
         emit BoxPaid(_msgSender(), box.gameContract, box.boxId, foundationAddress, box.boxType, box.paymentContract, box.price, box.qty);
     }
 
